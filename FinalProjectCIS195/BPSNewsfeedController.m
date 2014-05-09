@@ -122,11 +122,12 @@
         
     }
     //cell.imageView.frame = CGRectMake(60.0f , 50.0f, 150.0f, 150.0f);
-    BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
+    //BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
     NSString *cellText = [object[@"userName"] stringByAppendingString:@" completed the task, "];
     cellText = [cellText stringByAppendingString:object[@"taskName"]];
     //cellText = [cellText stringByAppendingString:object[@" in"]];
-    if ([object[@"taskOwner"] isEqualToString: appDelegate.username]) {
+    if ([object[@"taskOwner"] isEqualToString: object[@"userName"]]) {
+        
         cellText = [cellText stringByAppendingString:@", in his/her own hunt, "];
     } else {
         cellText = [cellText stringByAppendingString:@", in "];
@@ -171,24 +172,7 @@
         }
     }];
 */
-    
-    //NSURL *imageURL = [NSURL URLWithString:@"http://example.com/demo.jpg"];
-    //NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    //UIImage *image = [UIImage imageWithData:imageData];
-    //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[object objectForKey:@"userImageURL"]]]];
-    
-    /*cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-     cell.imageView.layer.cornerRadius = 8.0;
-     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-     cell.imageView.layer.masksToBounds = YES;
-     
-     [[cell imageView] setImage:image];
-     
-     cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-     cell.imageView.layer.cornerRadius = 8.0;
-     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-     cell.imageView.layer.masksToBounds = YES;
-     */
+
     
     return cell;
 }

@@ -18,6 +18,7 @@
 @implementation BPSAllHuntsViewController {
     PFObject *rowSelected;
     NSMutableArray *completedTasks;
+    NSMutableArray *completedParseTasks;
 }
 @synthesize parseHunts,className, allHuntsTable, toolbar;
 
@@ -31,6 +32,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.navigationItem.title = @"All Hunts";
     completedTasks = [[NSMutableArray alloc] init];
+    completedParseTasks = [[NSMutableArray alloc] init];
     PFQuery *query = [PFQuery queryWithClassName:@"CompletedTasks"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -41,6 +43,7 @@
             for (PFObject *object in objects) {
                 if ([object[@"userName"] isEqualToString:appDelegate.username]) {
                     [completedTasks addObject:object[@"huntID"]];
+                    [completedParseTasks addObject:object[@"taskID"]];
                 }
                 NSLog(@"%d", completedTasks.count);
             }
@@ -176,8 +179,9 @@
         UINavigationController *navController = [segue destinationViewController];
         BPSIndividualHuntViewController *vc = (BPSIndividualHuntViewController *)([navController viewControllers][0]);
         NSLog(@"%@", [rowSelected objectId]);
-        //vc.parseObject = rowSelected;
+        
         [vc setParseObject:rowSelected];
+        [vc setCompletedParseTasks:completedParseTasks];
     }
 }
 

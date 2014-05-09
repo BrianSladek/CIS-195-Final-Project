@@ -19,12 +19,12 @@
     PFObject *rowSelected;
     NSMutableArray *completedTasks;
 }
-@synthesize parseHunts,className, parseObject;
+@synthesize parseHunts,className, parseObject, completedParseTasks;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
     completedTasks = [[NSMutableArray alloc] init];
-    PFQuery *query = [PFQuery queryWithClassName:@"CompletedTasks"];
+    /*PFQuery *query = [PFQuery queryWithClassName:@"CompletedTasks"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
@@ -41,7 +41,7 @@
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
-    }];
+    }];*/
     
     
 }
@@ -121,10 +121,10 @@
     // Configure the cell to show todo item with a priority at the bottom
     cell.textLabel.text = [object objectForKey:@"taskName"];
     
-    if (completedTasks.count > 0) {
+    if (completedParseTasks.count > 0) {
         
         int counter = 0;
-        for (NSString *s in completedTasks) {
+        for (NSString *s in completedParseTasks) {
             if ([s isEqualToString:[object objectId]]) {
                 counter = counter + 1;
             }
