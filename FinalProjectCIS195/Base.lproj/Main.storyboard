@@ -62,31 +62,42 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Dcp-aW-tJf" kind="relationship" relationship="viewControllers" id="jIg-7N-Umt"/>
-                        <segue destination="hFL-Uc-7M8" kind="relationship" relationship="viewControllers" id="7rM-fI-Ji4"/>
-                        <segue destination="82o-v4-WYg" kind="relationship" relationship="viewControllers" id="Vja-WU-8yd"/>
+                        <segue destination="KV4-lq-d2X" kind="relationship" relationship="viewControllers" id="jIg-7N-Umt"/>
+                        <segue destination="FIt-w7-9G2" kind="relationship" relationship="viewControllers" id="7rM-fI-Ji4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ui-R5-icm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="491" y="46"/>
         </scene>
-        <!--Newsfeed Controller - Newsfeed-->
+        <!--Newsfeed Controller - Title-->
         <scene sceneID="QUO-fZ-cOD">
             <objects>
                 <tableViewController id="Dcp-aW-tJf" customClass="BPSNewsfeedController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="qch-9o-3th">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="203" sectionHeaderHeight="22" sectionFooterHeight="22" id="qch-9o-3th">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="120" id="gmS-gI-7vK">
-                                <rect key="frame" x="0.0" y="22" width="320" height="120"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="203" id="gmS-gI-7vK">
+                                <rect key="frame" x="0.0" y="22" width="320" height="203"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gmS-gI-7vK" id="KER-yj-vqa">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="202"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ml-me-fHO">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <items>
+                                                <navigationItem title="Newsfeed" id="Y3N-W9-IfO"/>
+                                            </items>
+                                        </navigationBar>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" staticText="YES"/>
+                                </accessibility>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -94,30 +105,50 @@
                             <outlet property="delegate" destination="Dcp-aW-tJf" id="XoI-7A-8OO"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Newsfeed" id="7zb-eA-xRI"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Title" id="Oce-L2-9ye"/>
+                    <connections>
+                        <outlet property="navbar" destination="Y3N-W9-IfO" id="rXs-s2-1ZM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ccD-vD-Giw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="-258"/>
+            <point key="canvasLocation" x="1666" y="-423"/>
         </scene>
-        <!--All Hunts View Controller - All Hunts-->
+        <!--All Hunts View Controller-->
         <scene sceneID="y2t-1m-IwR">
             <objects>
                 <tableViewController id="hFL-Uc-7M8" customClass="BPSAllHuntsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="22" sectionFooterHeight="22" id="6B9-yF-k2L">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="22" sectionFooterHeight="22" id="6B9-yF-k2L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="92" id="igZ-Qt-eVq">
-                                <rect key="frame" x="0.0" y="22" width="320" height="92"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="133" id="igZ-Qt-eVq">
+                                <rect key="frame" x="0.0" y="22" width="320" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="igZ-Qt-eVq" id="JYF-FF-SEr">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="132"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dH8-aD-hsx">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <items>
+                                                <navigationItem title="All Hunts" id="aVW-2v-oT6">
+                                                    <barButtonItem key="backBarButtonItem" title="Back" id="3KZ-Te-B4N"/>
+                                                    <barButtonItem key="rightBarButtonItem" title="Item" id="0QA-Sq-umm">
+                                                        <connections>
+                                                            <segue destination="6H6-uY-bhy" kind="modal" identifier="addOwnHuntButton" id="DV1-P1-SSl"/>
+                                                        </connections>
+                                                    </barButtonItem>
+                                                </navigationItem>
+                                            </items>
+                                        </navigationBar>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="EQM-yX-eN4" kind="modal" identifier="segueToIndividualHunt" id="fhE-xw-ikz"/>
+                                    <segue destination="b6x-7J-kWr" kind="modal" identifier="segueToIndividualHunt" id="fhE-xw-ikz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -126,13 +157,14 @@
                             <outlet property="delegate" destination="hFL-Uc-7M8" id="0FE-Ud-uo4"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="All Hunts" id="o93-ar-wlF"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="TVl-q7-OcZ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BzG-C5-uHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="859" y="460"/>
+            <point key="canvasLocation" x="1331" y="462"/>
         </scene>
-        <!--Individual Hunt View Controller-->
+        <!--Individual Hunt View Controller - A hunt-->
         <scene sceneID="a2t-rY-hSJ">
             <objects>
                 <tableViewController storyboardIdentifier="IndividualHuntViewController" id="EQM-yX-eN4" customClass="BPSIndividualHuntViewController" sceneMemberID="viewController">
@@ -155,13 +187,21 @@
                             <outlet property="delegate" destination="EQM-yX-eN4" id="CE0-gy-wxi"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="A hunt" id="Sni-5o-Dqf">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="SHJ-Gg-Oje">
+                            <connections>
+                                <segue destination="YbY-Ks-pci" kind="modal" id="UwZ-8R-Phz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="HSW-Kd-xqh" kind="modal" identifier="segueToPhotoView" id="Rmg-tQ-Sy6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZb-D1-MWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1195" y="468"/>
+            <point key="canvasLocation" x="2255" y="434"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="Mif-tF-oO7">
@@ -208,9 +248,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ACu-AM-1Um" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1257" y="206"/>
+            <point key="canvasLocation" x="2835" y="206"/>
         </scene>
-        <!--Add Hunt View Controller - Manage Your Hunts-->
+        <!--Add Hunt View Controller - Title-->
         <scene sceneID="Lqd-12-ovC">
             <objects>
                 <viewController id="82o-v4-WYg" customClass="BPSAddHuntViewController" sceneMemberID="viewController">
@@ -219,11 +259,11 @@
                         <viewControllerLayoutGuide type="bottom" id="kWU-4G-3Zg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9MP-tW-6XP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="2iY-Vt-Vcj">
-                                <rect key="frame" x="0.0" y="180" width="328" height="306"/>
+                                <rect key="frame" x="-4" y="100" width="328" height="311"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -232,7 +272,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiM-gw-LT7">
-                                <rect key="frame" x="270" y="147" width="30" height="30"/>
+                                <rect key="frame" x="270" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -242,7 +282,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbl-pI-hBZ">
-                                <rect key="frame" x="15" y="147" width="30" height="30"/>
+                                <rect key="frame" x="7" y="67" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -251,15 +291,8 @@
                                     <action selector="deleteHuntTaskButton:" destination="82o-v4-WYg" eventType="touchUpInside" id="TyM-eN-vrM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create Your Own Hunt!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHc-fi-S89">
-                                <rect key="frame" x="72" y="45" width="177" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGx-ut-t9B">
-                                <rect key="frame" x="142" y="494" width="37" height="30"/>
+                                <rect key="frame" x="136" y="430" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Done">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -269,7 +302,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6ce-T1-6iD">
-                                <rect key="frame" x="112" y="86" width="202" height="30"/>
+                                <rect key="frame" x="109" y="27" width="202" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -278,13 +311,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Hunt's Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqn-zv-FDe">
-                                <rect key="frame" x="5" y="90" width="99" height="21"/>
+                                <rect key="frame" x="7" y="31" width="99" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Objectives" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNf-qZ-Luh">
-                                <rect key="frame" x="120" y="151" width="81" height="21"/>
+                                <rect key="frame" x="114" y="71" width="81" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -292,7 +325,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Manage Your Hunts" id="0G2-WV-aqs"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Title" id="tGD-lN-tOB">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="wad-Aa-R4J">
+                            <connections>
+                                <segue destination="YbY-Ks-pci" kind="modal" id="xbT-jb-6tF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addHuntTableView" destination="2iY-Vt-Vcj" id="KGe-Fh-ECN"/>
                         <outlet property="huntTitle" destination="6ce-T1-6iD" id="WBq-ND-Ke7"/>
@@ -300,7 +340,82 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bY-M7-5zV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="705"/>
+            <point key="canvasLocation" x="686" y="776"/>
+        </scene>
+        <!--Navigation Controller - Newsfeed-->
+        <scene sceneID="SG9-HD-YUs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KV4-lq-d2X" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Newsfeed" id="7zb-eA-xRI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jvj-dZ-UIL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dcp-aW-tJf" kind="relationship" relationship="rootViewController" id="BKD-9g-SiQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jdk-Yh-nu3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1140" y="-423"/>
+        </scene>
+        <!--Navigation Controller - All Hunts-->
+        <scene sceneID="DXe-Zb-Nej">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FIt-w7-9G2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="All Hunts" id="o93-ar-wlF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qkv-K3-sG0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hFL-Uc-7M8" kind="relationship" relationship="rootViewController" id="qmh-BG-wf4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DS3-bx-0Kw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="984" y="454"/>
+        </scene>
+        <!--Navigation Controller - Manage Your Hunts-->
+        <scene sceneID="fUF-G4-Bwi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6H6-uY-bhy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Manage Your Hunts" id="0G2-WV-aqs"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W5G-M4-UI1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="82o-v4-WYg" kind="relationship" relationship="rootViewController" id="TVj-WR-oaq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jtb-XP-Uxa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="306" y="783"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Lfh-IV-GjR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b6x-7J-kWr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="efY-vh-jsY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EQM-yX-eN4" kind="relationship" relationship="rootViewController" id="gtW-c0-xxR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T7y-gX-Vg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1901" y="454"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -309,6 +424,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="cCM-Yd-ix5"/>
+        <segue reference="UwZ-8R-Phz"/>
     </inferredMetricsTieBreakers>
 </document>

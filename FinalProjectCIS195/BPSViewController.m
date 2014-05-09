@@ -10,6 +10,7 @@
 #import "BPSMainTabBarController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "BPSAppDelegate.h"
+#import <Parse/Parse.h>
 
 @interface BPSViewController ()
 - (IBAction)enterAppButton:(id)sender;
@@ -29,6 +30,7 @@
     loginView.frame = CGRectOffset(loginView.frame, (self.view.center.x - (loginView.frame.size.width / 2)), self.view.center.y);
     loginView.readPermissions = @[@"basic_info", @"user_photos", @"user_friends"];
     [self.view addSubview:loginView];
+    
 }
 
 

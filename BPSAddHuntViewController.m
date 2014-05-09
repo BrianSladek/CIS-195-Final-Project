@@ -28,6 +28,7 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,6 +36,10 @@
 	tasks = [[NSMutableArray alloc]initWithObjects: nil];
     //huntTitle.delegate = self;
     [huntTitle setReturnKeyType:UIReturnKeyDone];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    self.navigationItem.title = @"Create Hunt";
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,5 +161,7 @@
         [self.addHuntTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
+
+
 
 @end
