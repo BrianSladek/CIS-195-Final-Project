@@ -9,6 +9,7 @@
 #import "BPSAllHuntsViewController.h"
 #import "BPSIndividualHuntViewController.h"
 #import <Parse/Parse.h>
+#import "BPSAppDelegate.h"
 
 @interface BPSAllHuntsViewController()
 
@@ -16,6 +17,7 @@
 
 @implementation BPSAllHuntsViewController {
     PFObject *rowSelected;
+    NSMutableArray *completedTasks;
 }
 @synthesize parseHunts,className, allHuntsTable, toolbar;
 
@@ -23,15 +25,31 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                   target:self action:@selector(addButtonPressed:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.navigationItem.title = @"All Hunts";
+    completedTasks = [[NSMutableArray alloc] init];
+    PFQuery *query = [PFQuery queryWithClassName:@"CompletedTasks"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            // Do something with the found objects
+            BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
+            for (PFObject *object in objects) {
+                if ([object[@"userName"] isEqualToString:appDelegate.username]) {
+                    [completedTasks addObject:object[@"huntID"]];
+                }
+                NSLog(@"%d", completedTasks.count);
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
 }
 
 - (void)addButtonPressed:(id)sender {
@@ -67,7 +85,7 @@
 
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.className];
-    
+    BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
     // If no objects are loaded in memory, we look to the cache
     // first to fill the table and then subsequently do a query
     // against the network.
@@ -76,6 +94,7 @@
     }
     
     [query orderByDescending:@"createdAt"];
+    [query whereKey:@"fbid" containedIn:appDelegate.friends];
     
     return query;
 }
@@ -92,26 +111,41 @@
     }
     
     // Configure the cell to show todo item with a priority at the bottom
-    cell.textLabel.text = [object objectForKey:@"huntName"];
+    
+    NSString *mainTextLabel = [object objectForKey:@"huntName"];
+    if (completedTasks.count > 0) {
+
+        int counter = 0;
+        for (NSString *s in completedTasks) {
+            if ([s isEqualToString:[object objectId]]) {
+                counter = counter + 1;
+            }
+        }
+        mainTextLabel = [mainTextLabel stringByAppendingString:@" ("];
+        mainTextLabel = [mainTextLabel stringByAppendingString:[NSString stringWithFormat:@"%d", counter]];
+        mainTextLabel = [mainTextLabel stringByAppendingString:@"/"];
+        mainTextLabel = [mainTextLabel stringByAppendingString:object[@"numberOfTasks"]];
+        mainTextLabel = [mainTextLabel stringByAppendingString:@")"];
+    }
+    cell.textLabel.text  = mainTextLabel;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Posted by %@",
                                  [object objectForKey:@"username"]];
     
-    //NSURL *imageURL = [NSURL URLWithString:@"http://example.com/demo.jpg"];
-    //NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    //UIImage *image = [UIImage imageWithData:imageData];
+    cell.textLabel.adjustsFontSizeToFitWidth=YES;
+
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[object objectForKey:@"userImageURL"]]]];
    
-    cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    cell.imageView.layer.cornerRadius = 8.0;
+    cell.imageView.frame = CGRectMake(5.0f, 5.0f, 20.0f, 20.0f);
+    //cell.imageView.layer.cornerRadius = 8.0;
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     cell.imageView.layer.masksToBounds = YES;
 
     [[cell imageView] setImage:image];
     
-    cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    cell.imageView.layer.cornerRadius = 8.0;
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    cell.imageView.layer.masksToBounds = YES;
+    //cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    //cell.imageView.layer.cornerRadius = 8.0;
+    //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    //cell.imageView.layer.masksToBounds = YES;
     
     
     return cell;

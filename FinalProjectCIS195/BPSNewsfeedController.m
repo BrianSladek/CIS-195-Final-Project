@@ -126,7 +126,7 @@
     NSString *cellText = [object[@"userName"] stringByAppendingString:@" completed the task, "];
     cellText = [cellText stringByAppendingString:object[@"taskName"]];
     //cellText = [cellText stringByAppendingString:object[@" in"]];
-    if ([object[@"userName"] isEqualToString: appDelegate.username]) {
+    if ([object[@"taskOwner"] isEqualToString: appDelegate.username]) {
         cellText = [cellText stringByAppendingString:@", in his/her own hunt, "];
     } else {
         cellText = [cellText stringByAppendingString:@", in "];
@@ -142,7 +142,7 @@
             UIImage *image = [UIImage imageWithData:data];
             //((UIImageView *)cell.backgroundView).image = image;
             //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            cell.imageView.frame = CGRectMake(60.0f , 50.0f, 150.0f, 150.0f);
+            cell.imageView.frame = CGRectMake(80.0f , 50.0f, 150.0f, 150.0f);
             cell.imageView.image = image;
         }
     }];

@@ -9,6 +9,7 @@
 #import "BPSIndividualHuntViewController.h"
 #import "BPSPhotoViewController.h"
 #import <Parse/Parse.h>
+#import "BPSAppDelegate.h"
 
 @interface BPSIndividualHuntViewController ()
 
@@ -16,8 +17,34 @@
 
 @implementation BPSIndividualHuntViewController {
     PFObject *rowSelected;
+    NSMutableArray *completedTasks;
 }
 @synthesize parseHunts,className, parseObject;
+
+-(void) viewDidLoad {
+    [super viewDidLoad];
+    completedTasks = [[NSMutableArray alloc] init];
+    PFQuery *query = [PFQuery queryWithClassName:@"CompletedTasks"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            // Do something with the found objects
+            BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
+            for (PFObject *object in objects) {
+                if ([object[@"userName"] isEqualToString:appDelegate.username]) {
+                    [completedTasks addObject:object[@"taskID"]];
+                }
+                NSLog(@"%d", completedTasks.count);
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    
+}
 
 - (id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
@@ -49,6 +76,8 @@
     PFQuery *query = [PFQuery queryWithClassName:self.className];
     [query whereKey:@"huntID" equalTo:[parseObject objectId]];
     
+    self.navigationItem.title = parseObject[@"huntName"];
+    
     // If no objects are loaded in memory, we look to the cache
     // first to fill the table and then subsequently do a query
     // against the network.
@@ -70,16 +99,6 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -90,6 +109,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                         object:(PFObject *)object {
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -100,26 +120,19 @@
     
     // Configure the cell to show todo item with a priority at the bottom
     cell.textLabel.text = [object objectForKey:@"taskName"];
-   // cell.detailTextLabel.text = [NSString stringWithFormat:@"Posted by %@",
-                                // [object objectForKey:@"username"]];
     
-    //NSURL *imageURL = [NSURL URLWithString:@"http://example.com/demo.jpg"];
-    //NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    //UIImage *image = [UIImage imageWithData:imageData];
-    //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[object objectForKey:@"userImageURL"]]]];
-    
-    /*cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    cell.imageView.layer.cornerRadius = 8.0;
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    cell.imageView.layer.masksToBounds = YES;
-    
-    [[cell imageView] setImage:image];
-    
-    cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    cell.imageView.layer.cornerRadius = 8.0;
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    cell.imageView.layer.masksToBounds = YES;
-    */
+    if (completedTasks.count > 0) {
+        
+        int counter = 0;
+        for (NSString *s in completedTasks) {
+            if ([s isEqualToString:[object objectId]]) {
+                counter = counter + 1;
+            }
+        }
+        if (counter > 0) {
+            cell.contentView.backgroundColor = [ UIColor greenColor ];
+        }
+    }
     
     return cell;
 }

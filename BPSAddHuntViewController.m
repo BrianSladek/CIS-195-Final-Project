@@ -139,6 +139,7 @@
     huntObject[@"fbid"] = appDelegate.fbid;
     huntObject[@"username"] = appDelegate.username;
     huntObject[@"userImageURL"] = appDelegate.userImageURL;
+    huntObject[@"numberOfTasks"] = [NSString stringWithFormat: @"%d", tasks.count];
     [huntObject save];
 
     for (NSString *task in tasks) {
