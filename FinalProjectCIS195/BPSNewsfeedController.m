@@ -7,6 +7,7 @@
 //
 
 #import "BPSNewsfeedController.h"
+#import "BPSAppDelegate.h"
 
 @interface BPSNewsfeedController ()
 
@@ -45,10 +46,14 @@
 }
 
 - (PFQuery *)queryForTable {
+    BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
     PFQuery *query = [PFQuery queryWithClassName:self.className];
+    [query whereKey:@"fbid" containedIn:appDelegate.friends];
     
     // If no objects are loaded in memory, we look to the cache
     // first to fill the table and then subsequently do a query
+    NSLog(@"%d",appDelegate.friends.count);
+    
     // against the network.
     if ([self.objects count] == 0) {
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
@@ -98,10 +103,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault //was Subtitle
                                       reuseIdentifier:CellIdentifier];
         
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 8.0, 300.0, 30.0)];
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 8.0, 300.0, 50.0)];
         [nameLabel setTag:1];
         [nameLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
-        [nameLabel setFont:[UIFont boldSystemFontOfSize:17.0]];
+        [nameLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+        nameLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        nameLabel.numberOfLines = 0;
         [cell.contentView addSubview:nameLabel];
         
       //  UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -115,7 +122,20 @@
         
     }
     //cell.imageView.frame = CGRectMake(60.0f , 50.0f, 150.0f, 150.0f);
-    [(UILabel *)[cell.contentView viewWithTag:1] setText:[object[@"userName"] stringByAppendingString:@" completed the task."]];
+    BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
+    NSString *cellText = [object[@"userName"] stringByAppendingString:@" completed the task, "];
+    cellText = [cellText stringByAppendingString:object[@"taskName"]];
+    //cellText = [cellText stringByAppendingString:object[@" in"]];
+    if ([object[@"userName"] isEqualToString: appDelegate.username]) {
+        cellText = [cellText stringByAppendingString:@", in his/her own hunt, "];
+    } else {
+        cellText = [cellText stringByAppendingString:@", in "];
+        cellText = [cellText stringByAppendingString:object[@"taskOwner"]];
+        cellText = [cellText stringByAppendingString:@"'s hunt, "];
+    }
+    cellText = [cellText stringByAppendingString:object[@"huntName"]];
+    cellText = [cellText stringByAppendingString:@"!"];
+    [(UILabel *)[cell.contentView viewWithTag:1] setText:cellText];
 
     [object[@"userImage"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error) {

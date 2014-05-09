@@ -25,6 +25,8 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    self.friends = [[NSMutableArray alloc] init];
+    
     return YES;
 }
 							
@@ -70,10 +72,10 @@
     [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
                                                   NSDictionary* result,
                                                   NSError *error) {
-        friends = [result objectForKey:@"data"];
-        NSLog(@"Found: %i friends", friends.count);
-        for (NSDictionary<FBGraphUser>* friend in friends) {
-            //NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+        NSMutableArray *fbFriends = [result objectForKey:@"data"];
+        NSLog(@"Found: %i friends", fbFriends.count);
+        for (NSDictionary<FBGraphUser>* friend in fbFriends) {
+            [self.friends addObject:friend.id];
         }
     }];
     
@@ -93,6 +95,7 @@
             [userObject saveInBackground];
             NSLog(@"%@", username);
             NSLog(@"%@", fbid);
+            [self.friends addObject:self.fbid];
         }
     }];
     

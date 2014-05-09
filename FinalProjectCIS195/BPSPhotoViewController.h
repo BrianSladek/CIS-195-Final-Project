@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface BPSPhotoViewController : UIViewController
-
+@property (strong, nonatomic) PFObject *parseObject;
 @end

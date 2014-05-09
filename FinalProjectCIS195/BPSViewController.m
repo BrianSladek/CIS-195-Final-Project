@@ -31,6 +31,42 @@
     loginView.readPermissions = @[@"basic_info", @"user_photos", @"user_friends"];
     [self.view addSubview:loginView];
     
+    
+    
+    BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
+    [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *FBuser, NSError *error) {
+        if (error) {
+            // Handle error
+        }
+        
+        else {
+            NSString *username = [FBuser name];
+            NSString *fbid = [FBuser id];
+            NSString *userImageURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [FBuser username]];
+            NSLog(@"%@", username);
+            NSLog(@"%@", userImageURL);
+            appDelegate.fbid = fbid;
+            appDelegate.username = username;
+            appDelegate.userImageURL = userImageURL;
+        }
+    }];
+    
+    FBRequest* friendsRequest = [FBRequest requestForMyFriends];
+    [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
+                                                  NSDictionary* result,
+                                                  NSError *error) {
+        BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
+        NSMutableArray *fbFriends = [result objectForKey:@"data"];
+        NSLog(@"Fowund: %i friends", fbFriends.count);
+        appDelegate.friends = [[NSMutableArray alloc] init];
+        for (NSDictionary<FBGraphUser>* friend in fbFriends) {
+            [appDelegate.friends addObject:friend.id];
+            // NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+        }
+        [appDelegate.friends addObject:appDelegate.fbid];
+    }];
+
+    
 }
 
 
@@ -46,36 +82,7 @@
     if (FBSession.activeSession.isOpen == YES)
     {
         
-        BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
-        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *FBuser, NSError *error) {
-            if (error) {
-                // Handle error
-            }
-            
-            else {
-                NSString *username = [FBuser name];
-                NSString *fbid = [FBuser id];
-                NSString *userImageURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [FBuser username]];
-                NSLog(@"%@", username);
-                NSLog(@"%@", userImageURL);
-                appDelegate.fbid = fbid;
-                appDelegate.username = username;
-                appDelegate.userImageURL = userImageURL;
-            }
-        }];
         
-        FBRequest* friendsRequest = [FBRequest requestForMyFriends];
-        [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
-                                                      NSDictionary* result,
-                                                      NSError *error) {
-            NSArray *friends = [result objectForKey:@"data"];
-            NSLog(@"Found: %i friends", friends.count);
-            appDelegate.friends = friends;
-            //for (NSDictionary<FBGraphUser>* friend in friends) {
-               // NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
-            //}
-        }];
-
         
         BPSMainTabBarController *mainTabBar =
         [self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBar"];

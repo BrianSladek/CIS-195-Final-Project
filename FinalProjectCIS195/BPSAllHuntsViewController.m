@@ -14,7 +14,9 @@
 
 @end
 
-@implementation BPSAllHuntsViewController
+@implementation BPSAllHuntsViewController {
+    PFObject *rowSelected;
+}
 @synthesize parseHunts,className, allHuntsTable, toolbar;
 
 - (void)viewDidLoad
@@ -122,11 +124,27 @@
     //Retrieve the selected Category
     PFObject *obj = [self.objects objectAtIndex:indexPath.row];
     
-    NSLog(@"%@", [obj objectForKey:@"huntName"]);
+    rowSelected = obj;
+    
+    //NSLog(@"%@", [obj objectForKey:@"huntName"]);
     
     [self performSegueWithIdentifier:@"segueToIndividualHunt" sender:self];
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"segueToIndividualHunt"])
+    {
+        
+        UINavigationController *navController = [segue destinationViewController];
+        BPSIndividualHuntViewController *vc = (BPSIndividualHuntViewController *)([navController viewControllers][0]);
+        NSLog(@"%@", [rowSelected objectId]);
+        //vc.parseObject = rowSelected;
+        [vc setParseObject:rowSelected];
+    }
 }
 
 

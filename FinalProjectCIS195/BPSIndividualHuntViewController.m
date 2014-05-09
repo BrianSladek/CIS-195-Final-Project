@@ -7,14 +7,17 @@
 //
 
 #import "BPSIndividualHuntViewController.h"
+#import "BPSPhotoViewController.h"
 #import <Parse/Parse.h>
 
 @interface BPSIndividualHuntViewController ()
 
 @end
 
-@implementation BPSIndividualHuntViewController
-@synthesize parseHunts,className;
+@implementation BPSIndividualHuntViewController {
+    PFObject *rowSelected;
+}
+@synthesize parseHunts,className, parseObject;
 
 - (id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
@@ -44,6 +47,7 @@
 
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.className];
+    [query whereKey:@"huntID" equalTo:[parseObject objectId]];
     
     // If no objects are loaded in memory, we look to the cache
     // first to fill the table and then subsequently do a query
@@ -127,19 +131,25 @@
     //Retrieve the selected Category
     PFObject *obj = [self.objects objectAtIndex:indexPath.row];
     
+    rowSelected = obj;
+    
     NSLog(@"%@", [obj objectForKey:@"huntName"]);
     
     [self performSegueWithIdentifier:@"segueToPhotoView" sender:self];
     
-    //Call the second view with the selected Category on iniWithCategory:obj.objectId
-    //iPFCollectionSubCategory *frmNewSubCategory = [[iPFCollectionSubCategory alloc] initWithCategory:obj.objectId];
-    
-    //Call view
-    //[self.navigationController pushViewController:frmNewSubCategory animated:YES];
-    //[frmNewSubCategory release];
-    
-    //
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"segueToPhotoView"])
+    {
+        
+        BPSPhotoViewController *vc = (BPSPhotoViewController *)[segue destinationViewController];
+
+        [vc setParseObject:rowSelected];
+    }
 }
 
 @end

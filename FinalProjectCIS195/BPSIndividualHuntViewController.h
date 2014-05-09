@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) NSArray *parseHunts;
 @property (strong, nonatomic) NSString *className;
+@property (strong, nonatomic) PFObject *parseObject;
 
 @end

@@ -12,6 +12,7 @@
 
 @interface BPSPhotoViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *chosenImage;
+
 - (IBAction)choosePhoto:(id)sender;
 
 
@@ -19,6 +20,7 @@
 @end
 
 @implementation BPSPhotoViewController
+@synthesize parseObject;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -124,9 +126,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
             newPhotoObject[@"fbid"] = appDelegate.fbid;
             newPhotoObject[@"userName"] = appDelegate.username;
             newPhotoObject[@"userPicture"] = appDelegate.userImageURL;
-            //newPhotoObject[@"taskID"] = appDelegate.fbid;
-            //newPhotoObject[@"huntID"] = appDelegate.fbid;
-            
+            newPhotoObject[@"taskID"] = [self.parseObject objectId];
+            newPhotoObject[@"huntID"] = self.parseObject[@"huntID"];
+            newPhotoObject[@"taskName"] = self.parseObject[@"taskName"];
+            newPhotoObject[@"huntName"] = self.parseObject[@"huntName"];
+            newPhotoObject[@"taskOwner"] = self.parseObject[@"taskOwner"];
             
             [newPhotoObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {

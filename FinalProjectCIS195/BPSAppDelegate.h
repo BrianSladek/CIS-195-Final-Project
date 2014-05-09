@@ -13,7 +13,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *fbid;
 @property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSArray *friends;
+@property (strong, nonatomic) NSMutableArray *friends;
 @property (strong, nonatomic) NSString *userImageURL;
 
 

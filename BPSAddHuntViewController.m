@@ -144,6 +144,8 @@
     for (NSString *task in tasks) {
         PFObject *tasksObject = [PFObject objectWithClassName:@"Tasks"];
         tasksObject[@"taskName"] = task;
+        tasksObject[@"huntName"] = huntTitle.text;
+        tasksObject[@"taskOwner"] = appDelegate.username;
         tasksObject[@"huntID"] = [huntObject objectId];
         [tasksObject saveInBackground];
     }
