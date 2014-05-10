@@ -24,26 +24,7 @@
 -(void) viewDidLoad {
     [super viewDidLoad];
     completedTasks = [[NSMutableArray alloc] init];
-    /*PFQuery *query = [PFQuery queryWithClassName:@"CompletedTasks"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %d scores.", objects.count);
-            // Do something with the found objects
-            BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
-            for (PFObject *object in objects) {
-                if ([object[@"userName"] isEqualToString:appDelegate.username]) {
-                    [completedTasks addObject:object[@"taskID"]];
-                }
-                NSLog(@"%d", completedTasks.count);
-            }
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];*/
-    
-    
+   
 }
 
 - (id)initWithCoder:(NSCoder *)aCoder {

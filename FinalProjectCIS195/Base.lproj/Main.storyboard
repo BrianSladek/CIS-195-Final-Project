@@ -75,7 +75,7 @@
             <objects>
                 <tableViewController id="Dcp-aW-tJf" customClass="BPSNewsfeedController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="203" sectionHeaderHeight="22" sectionFooterHeight="22" id="qch-9o-3th">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -120,7 +120,7 @@
             <objects>
                 <tableViewController id="hFL-Uc-7M8" customClass="BPSAllHuntsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="93" sectionHeaderHeight="22" sectionFooterHeight="22" id="6B9-yF-k2L">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -169,7 +169,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="IndividualHuntViewController" id="EQM-yX-eN4" customClass="BPSIndividualHuntViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" id="l1h-yG-fMg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -329,7 +329,7 @@
                     <navigationItem key="navigationItem" title="Title" id="tGD-lN-tOB">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="wad-Aa-R4J">
                             <connections>
-                                <segue destination="YbY-Ks-pci" kind="modal" id="xbT-jb-6tF"/>
+                                <segue destination="YbY-Ks-pci" kind="modal" identifier="goFromAddHuntToNewsfeed" id="xbT-jb-6tF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -340,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bY-M7-5zV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="686" y="776"/>
+            <point key="canvasLocation" x="574" y="892"/>
         </scene>
         <!--Navigation Controller - Newsfeed-->
         <scene sceneID="SG9-HD-YUs">
@@ -424,6 +424,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="UwZ-8R-Phz"/>
+        <segue reference="xbT-jb-6tF"/>
     </inferredMetricsTieBreakers>
 </document>

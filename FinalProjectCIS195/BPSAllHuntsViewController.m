@@ -139,16 +139,10 @@
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[object objectForKey:@"userImageURL"]]]];
    
     cell.imageView.frame = CGRectMake(5.0f, 5.0f, 20.0f, 20.0f);
-    //cell.imageView.layer.cornerRadius = 8.0;
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     cell.imageView.layer.masksToBounds = YES;
 
     [[cell imageView] setImage:image];
-    
-    //cell.imageView.frame = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    //cell.imageView.layer.cornerRadius = 8.0;
-    //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    //cell.imageView.layer.masksToBounds = YES;
     
     
     return cell;
@@ -162,8 +156,6 @@
     PFObject *obj = [self.objects objectAtIndex:indexPath.row];
     
     rowSelected = obj;
-    
-    //NSLog(@"%@", [obj objectForKey:@"huntName"]);
     
     [self performSegueWithIdentifier:@"segueToIndividualHunt" sender:self];
 

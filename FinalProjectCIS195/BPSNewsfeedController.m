@@ -50,10 +50,6 @@
     PFQuery *query = [PFQuery queryWithClassName:self.className];
     [query whereKey:@"fbid" containedIn:appDelegate.friends];
     
-    // If no objects are loaded in memory, we look to the cache
-    // first to fill the table and then subsequently do a query
-    NSLog(@"%d",appDelegate.friends.count);
-    
     // against the network.
     if ([self.objects count] == 0) {
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
@@ -77,13 +73,8 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.title = @"Newsfeed";
-    //[self.mainLabel setTag: 1000];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +89,7 @@
                         object:(PFObject *)object {
     static NSString *CellIdentifier = @"NewsfeedCell";
     
+    
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault //was Subtitle
@@ -110,77 +102,37 @@
         nameLabel.lineBreakMode = NSLineBreakByWordWrapping;
         nameLabel.numberOfLines = 0;
         [cell.contentView addSubview:nameLabel];
-        
-      //  UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        //[cell setBackgroundColor:[UIColor clearColor]];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        //[cell setBackgroundView:bgView];
-        //[cell setIndentationWidth:0.0];*/
-        //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        //cell.imageView.frame = CGRectMake(60.0f , 50.0f, 150.0f, 150.0f);
-        
-        
+        cell.imageView.frame = CGRectMake(80.0f , 50.0f, 150.0f, 150.0f);
+
     }
-    //cell.imageView.frame = CGRectMake(60.0f , 50.0f, 150.0f, 150.0f);
-    //BPSAppDelegate *appDelegate = (BPSAppDelegate*) [UIApplication sharedApplication].delegate;
-    NSString *cellText = [object[@"userName"] stringByAppendingString:@" completed the task, "];
+    NSString *cellText = [object[@"userName"] stringByAppendingString:@" completed the task, '"];
     cellText = [cellText stringByAppendingString:object[@"taskName"]];
-    //cellText = [cellText stringByAppendingString:object[@" in"]];
+
     if ([object[@"taskOwner"] isEqualToString: object[@"userName"]]) {
-        
-        cellText = [cellText stringByAppendingString:@", in his/her own hunt, "];
+        cellText = [cellText stringByAppendingString:@"', in his/her own hunt, '"];
     } else {
-        cellText = [cellText stringByAppendingString:@", in "];
+        cellText = [cellText stringByAppendingString:@"', in "];
         cellText = [cellText stringByAppendingString:object[@"taskOwner"]];
-        cellText = [cellText stringByAppendingString:@"'s hunt, "];
+        cellText = [cellText stringByAppendingString:@"'s hunt, '"];
     }
     cellText = [cellText stringByAppendingString:object[@"huntName"]];
-    cellText = [cellText stringByAppendingString:@"!"];
+    cellText = [cellText stringByAppendingString:@"'!"];
     [(UILabel *)[cell.contentView viewWithTag:1] setText:cellText];
 
     [object[@"userImage"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error) {
             UIImage *image = [UIImage imageWithData:data];
-            //((UIImageView *)cell.backgroundView).image = image;
-            //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
             cell.imageView.frame = CGRectMake(80.0f , 50.0f, 150.0f, 150.0f);
             cell.imageView.image = image;
         }
     }];
-    
-
-    
-    // Configure the cell to show todo item with a priority at the bottom
-    //cell.textLabel.text = @"Objective Completed"; //[object objectForKey:@"taskName"];
-   // cell.detailTextLabel.text = [NSString stringWithFormat:@"Completed by %@",
-    // [object objectForKey:@"userName"]];
-   /*
-    UILabel *labelsss = (UILabel *)[cell.contentView viewWithTag:10];
-    if (labelsss == nil) {
-        NSLog(@"nullllll");
-    }*/
-    //self.mainLabel.text = @"klsdjkflskfldfdksl";
-   // [labelsss setText:[NSString stringWithFormat:@"Row %i in Section %i", [indexPath row], [indexPath section]]];
-    //labelsss.text = @"kdlkasj";
-   // UIImage *userImage = (UIImage*) [cell viewWithTag:101];
-   /*
-    [object[@"userImage"] getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        if (!error) {
-            UIImage *image = [UIImage imageWithData:data];
-            UIImage *userImage = (UIImage*) [cell viewWithTag:101];
-            userImage = image;
-        }
-    }];
-*/
-
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    //cell.imageView.frame = CGRectMake(60.0f , 50.0f, 150.0f, 150.0f);
     
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
@@ -190,17 +142,6 @@
     
     NSLog(@"%@", [obj objectForKey:@"huntName"]);
     
-    
-    //[self performSegueWithIdentifier:@"segueToPhotoView" sender:self];
-    
-    //Call the second view with the selected Category on iniWithCategory:obj.objectId
-    //iPFCollectionSubCategory *frmNewSubCategory = [[iPFCollectionSubCategory alloc] initWithCategory:obj.objectId];
-    
-    //Call view
-    //[self.navigationController pushViewController:frmNewSubCategory animated:YES];
-    //[frmNewSubCategory release];
-    
-    //
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

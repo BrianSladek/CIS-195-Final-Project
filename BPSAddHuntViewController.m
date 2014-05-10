@@ -52,12 +52,6 @@
     [textField resignFirstResponder];
 }
 
-//- (IBAction)dismissKeyboard:(id)sender;
-//{
-  //  [sender becomeFirstResponder];
-   // [sender resignFirstResponder];
-//}
-
 - (IBAction)closeKeyboard:(id)sender;
 {
     [sender becomeFirstResponder];
@@ -151,6 +145,7 @@
         [tasksObject saveInBackground];
     }
     
+    [self performSegueWithIdentifier:@"goFromAddHuntToNewsfeed" sender:self];
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
